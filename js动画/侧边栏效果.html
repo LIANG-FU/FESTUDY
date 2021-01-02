@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>侧边栏效果</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: relative;
+            left: -200px;
+        }
+        #box span{
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background-color: #000000;
+            color: #ffffff;
+            right: -40px;
+            top: 50%;
+            margin-top: -30px;
+            line-height: 60px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <span>拉开</span>
+    </div>
+    <script>
+        window.onload = function(){
+            var box = document.getElementById('box')
+            let timer = null
+            box.onmouseover = function(){
+                startAnimation(box,0,5)
+                
+            }
+            box.onmouseout = function(){
+                startAnimation(box,-200,5)
+            }
+            function startAnimation(target,end,speed){
+                // 先关闭定时器
+                clearInterval(timer)
+                speed = end > target.offsetLeft ? speed : -speed
+                timer = setInterval(function(){
+                    if(target.offsetLeft == end){
+                        clearInterval(timer)
+                        return;
+                    }
+                    target.style.left = target.offsetLeft + speed + 'px'
+                },30)
+            }
+        }
+    </script>
+</body>
+</html>
