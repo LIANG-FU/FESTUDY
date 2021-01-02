@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 if [ $1 ]
 then
     git init
