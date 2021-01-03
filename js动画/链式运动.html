@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>链式动画</title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: palegoldenrod;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="./js/myAnimation.js"></script>
+    <script>
+        window.onload = function(){
+            let box = document.getElementById('box')
+            box.onmouseover = function(){
+                startAnimation(box,'width',500,function(){
+                    startAnimation(box,'height',400,function(){
+                        startAnimation(box,'opacity',50)
+                    })
+                })
+            }
+        }
+    </script>
+</body>
+</html>

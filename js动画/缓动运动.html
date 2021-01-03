@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>侧边栏效果</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: relative;
+            left: -200px;
+        }
+        #box span{
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background-color: #000000;
+            color: #ffffff;
+            right: -40px;
+            top: 50%;
+            margin-top: -30px;
+            line-height: 60px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <span>拉开</span>
+    </div>
+    <script>
+        // 缓动运动公式： 加速度 = （结束值 - 起始值）/ 缓动系数   加速度由慢到快
+        window.onload = function(){
+            var box = document.getElementById('box')
+            let timer = null
+            box.onmouseover = function(){
+                startAnimation(this,0,10)
+            }
+            box.onmouseout = function(){
+                startAnimation(this,-200,10)
+            }
+            function startAnimation(target,end,modulus){
+                // 先关闭定时器
+                clearInterval(timer)
+                timer = setInterval(function(){
+                    // 处理边界问题
+                    if(target.offsetLeft == end){
+                        clearInterval(timer)
+                        return;
+                    }
+                    let speed = (end - target.offsetLeft) / modulus
+                    // 如果速度大于0，证明物体往右走，速度小于0，证明往左走
+                    speed = end > target.offsetLeft ? Math.ceil(speed) : Math.floor(speed)
+                    target.style.left = target.offsetLeft + speed + 'px'
+                },30)
+            }
+        }
+    </script>
+</body>
+</html>

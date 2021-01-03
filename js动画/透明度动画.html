@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>透明度动画</title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        window.onload = function(){
+            // 1. 获取需要的元素
+            let box = document.getElementById('box')
+            // 监听事件
+            box.onmouseover = function(){
+                opacityAnimation(this,100)
+            }
+            let timer = null
+            function opacityAnimation(target, endAlpha){
+                clearInterval(timer)
+                console.log(target.style)
+                timer = setInterval(function(){
+                },30)
+            }
+        }
+    </script>
+</body>
+</html>
