@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="route">
+        <ul>
+            <li><a href="page1">page1</a></li>
+            <li><a href="page2">page2</a></li>
+        </ul>
+    </div>
+    <div id="app">
+
+    </div>
+    <script>
+        window.addEventListener('load',load)
+        // 监听popState事件
+        window.addEventListener('popState',()=>console.log('popState'))
+        PopChange()
+        function load(){
+            let aTags = document.getElementsByTagName('a');
+            for(let i = 0; i < aTags.length; i++){
+                let curNode = aTags[i]
+                curNode.addEventListener('click',(e)=>{
+                    e.preventDefault()
+                    let href = curNode.getAttribute('href')
+                    history.pushState(null,'',href)
+                    console.log(history)
+                    PopChange()
+                })
+            }
+        }
+        function PopChange(){
+            console.log('location', location)
+            switch(location.pathname){
+                case '/page1':
+                    document.getElementById('app').innerText = 'page1'
+                    return
+                case '/page2':
+                    document.getElementById('app').innerText = 'page2'
+                    return
+                default:
+                    document.getElementById('app').innerText = 'page1'
+                    return
+            }
+        }
+    </script>
+</body>
+</html>
