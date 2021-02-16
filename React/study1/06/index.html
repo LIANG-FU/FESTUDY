@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hello-React</title>
+  </head>
+  <body>
+    <!-- 准备好一个容器 -->
+    <div id="app"></div>
+    <!-- 引入React核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入bable，用于将jsx转为js -->
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+    <!-- 此处一定要写成 babel，告诉引擎里面是jsx且用bable去转译，如果不写默认会当做js  -->
+    <script type="text/babel">
+      class Person extends React.Component {
+        static propTypes = {
+          name: PropTypes.string,
+          age: PropTypes.number,
+        };
+        state = {
+          showName: this.props.name,
+        };
+        nameIpt = React.createRef();
+        changeName = (event) => {
+          const { value: name } = event.target;
+          this.setState({
+            showName: name,
+          });
+        };
+
+        handleSubmit = (event)=>{
+            event.preventDefault();
+            const {username,password} = this
+            alert(password.value)
+        }
+        render() {
+          const { age } = this.props;
+          return (
+            <div>
+              <div>
+                <div>姓名：{this.state.showName}</div>
+                <div>年龄：{age}</div>
+                <form action="www.baidu.com" method="post" onSubmit={this.handleSubmit}>
+                    用户名： <input ref={c=>this.username = c} type="text" name="username" onInput={this.changeName} />    
+                    密码：<input ref={c=>this.password = c} type="password" name="password" onInput={this.changePassword} /> 
+                    <button type="commit">登录</button>
+                </form>
+              </div>
+            </div>
+          );
+        }
+      }
+      const data = { name: "傅良", age: 23 };
+      // 2.渲染虚拟DOM到页面
+      ReactDOM.render(<Person {...data} />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

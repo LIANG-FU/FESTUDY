@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello-React</title>
+</head>
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="app"></div>
+    <!-- 引入React核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入bable，用于将jsx转为js -->
+    <script src="../js//babel.min.js"></script>
+    <!-- 此处一定要写成 babel，告诉引擎里面是jsx且用bable去转译，如果不写默认会当做js  -->
+    <script type="text/babel">  
+        // 创建函数式组件
+        function Demo(){
+            // babel翻译完以后开启严格模式，导致this在全局指向undefined
+            console.log(this)
+            return <h2>函数式组件</h2>
+        }
+        // 2.渲染虚拟DOM到页面
+        ReactDOM.render(Demo(),document.getElementById('app'))
+    </script>
+</body>
+</html>
